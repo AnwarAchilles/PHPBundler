@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php
+
+$query = "";
+if (!empty($_GET)) {
+    
+    $query = "?".$_SERVER["QUERY_STRING"];
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +49,7 @@
 
 </head>
 <body>
-    
+
     <div id="iframe">
         <div id="loader"></div>
         <iframe frameborder="0"></iframe>
@@ -59,11 +67,11 @@
                 loader.style.display = "none";
             }, 1500);
 
-            iframe.setAttribute("src", baseurl+"/<?=$this->config["serve"] ?>");
+            iframe.setAttribute("src", baseurl+"/<?=$this->config["serve"] ?><?=$query?>");
             
             watch.addEventListener("watch", function (event) {
                 if (size != event.data) {
-                    window.location.assign("?");
+                    window.location.assign("");
                     console.log("page reloaded successfully");
                 }
             });

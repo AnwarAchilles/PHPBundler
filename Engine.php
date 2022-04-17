@@ -114,7 +114,7 @@ class Engine {
         }
         if ($name=='watch') {
             $this->watch = [];
-            $this->watch['baseurl'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].str_replace('?','',$_SERVER['REQUEST_URI']);
+            $this->watch['baseurl'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].strchr($_SERVER['REQUEST_URI'], '?', true);
             $this->watch['size'] = 0;
         }
     }
