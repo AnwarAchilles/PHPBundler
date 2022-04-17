@@ -114,7 +114,12 @@ class Engine {
         }
         if ($name=='watch') {
             $this->watch = [];
-            $this->watch['baseurl'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].strchr($_SERVER['REQUEST_URI'], '?', true);
+            if (strpos($_SERVER['REQUEST_URI'], '?')) {
+                $uri = strchr($_SERVER['REQUEST_URI'], '?', true);
+            }else {
+                $uri = $_SERVER['REQUEST_URI'];
+            }
+            $this->watch['baseurl'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].$uri;
             $this->watch['size'] = 0;
         }
     }
@@ -374,7 +379,7 @@ class Engine {
         if (file_exists($output)) {
             unlink($output);
         }
-        
+
         $_inserted_ = $this->_source($output, $this->output);
         if ($_inserted_) {
             $SERVE = $this->_serve();
