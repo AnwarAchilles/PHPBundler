@@ -370,14 +370,15 @@ class Engine {
 
         $this->_watch($this->entry);
         $this->_output($bundle, $this->packet);
+        
         if (file_exists($output)) {
             unlink($output);
-        }
-        
-        $_inserted_ = $this->_source($output, $this->output);
-        if ($_inserted_) {
-            $SERVE = $this->_serve();
-            @ eval("?> ".$SERVE." <?php");
+        }else {
+            $_inserted_ = $this->_source($output, $this->output);
+            if ($_inserted_) {
+                $SERVE = $this->_serve();
+                @ eval("?> ".$SERVE." <?php");
+            }
         }
     }
 
@@ -405,14 +406,14 @@ class Engine {
     {
         if ($this->config['serve'] ) {
             /*eval("?> ".$this->_source($this->config['serve'] )." <?php"); */
-            if (isset($_GET['watch'])) {
+            if (isset($_GET['__watch_bundler__'])) {
                 
                 header("Content-Type: text/event-stream");
                 header("Cache-Control: no-cache");
                 
                 $this->_preparation('watch');
                 $this->_watch($this->entry);
-                echo "event: watch\n";
+                echo "event: __watch_bundler__\n";
                 echo "data: ".$this->watch['size']."\n\n";
                 ob_flush();
                 flush();

@@ -60,7 +60,7 @@ if (!empty($_GET)) {
             var baseurl = "<?= $this->watch["baseurl"] ?>";
             var loader = document.querySelector("#loader");
             var iframe = document.querySelector("#iframe>iframe");
-            var watch = new EventSource(baseurl+"?watch");
+            var watch = new EventSource(baseurl+"?__watch_bundler__");
             var size = "<?= $this->watch["size"] ?>";
 
             setTimeout( function() {
@@ -69,7 +69,7 @@ if (!empty($_GET)) {
 
             iframe.setAttribute("src", baseurl+"/<?=$this->config["serve"] ?><?=$query?>");
             
-            watch.addEventListener("watch", function (event) {
+            watch.addEventListener("__watch_bundler__", function (event) {
                 if (size != event.data) {
                     window.location.assign("");
                     console.log("page reloaded successfully");
