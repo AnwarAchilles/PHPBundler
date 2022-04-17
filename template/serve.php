@@ -52,7 +52,7 @@
             var baseurl = "<?= $this->watch["baseurl"] ?>";
             var loader = document.querySelector("#loader");
             var iframe = document.querySelector("#iframe>iframe");
-            var watch = new EventSource("http://localhost/PHPBundler/version-0.0.1/?watch");
+            var watch = new EventSource(baseurl+"?watch");
             var size = "<?= $this->watch["size"] ?>";
 
             setTimeout( function() {
