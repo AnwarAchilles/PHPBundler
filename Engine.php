@@ -406,14 +406,14 @@ class Engine {
     {
         if ($this->config['serve'] ) {
             /*eval("?> ".$this->_source($this->config['serve'] )." <?php"); */
-            if (isset($_GET['__watch_bundler__'])) {
+            if (isset($_GET['__watch_bundle__'])) {
                 
                 header("Content-Type: text/event-stream");
                 header("Cache-Control: no-cache");
                 
                 $this->_preparation('watch');
                 $this->_watch($this->entry);
-                echo "event: __watch_bundler__\n";
+                echo "event: __watch_bundle__\n";
                 echo "data: ".$this->watch['size']."\n\n";
                 ob_flush();
                 flush();
