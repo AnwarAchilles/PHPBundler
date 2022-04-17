@@ -373,12 +373,12 @@ class Engine {
         
         if (file_exists($output)) {
             unlink($output);
-        }else {
-            $_inserted_ = $this->_source($output, $this->output);
-            if ($_inserted_) {
-                $SERVE = $this->_serve();
-                @ eval("?> ".$SERVE." <?php");
-            }
+        }
+        
+        $_inserted_ = $this->_source($output, $this->output);
+        if ($_inserted_) {
+            $SERVE = $this->_serve();
+            @ eval("?> ".$SERVE." <?php");
         }
     }
 
